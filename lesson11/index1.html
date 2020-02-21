@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>11 组合 VS 继承</title>
+</head>
+<body>
+	<p>组合类似于vue的插槽</p>
+	<div id="app"></div>
+	<script src="../assets/js/react.development.js" crossorigin></script>
+    <script src="../assets/js/react-dom.development.js" crossorigin></script>
+    <script src="../assets/js/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+    	function FancyBorder(props) {
+			return (
+				<div className={"fancyBorder fancyBorder-" + props.color}>
+					{props.children}
+				</div>
+			)
+    	}
+    	function WelcomeDialog() {
+			return (
+				<FancyBorder color="blue">
+					<h1 className="dialog-title">welcome</h1>
+					<p className="dialog-message">Thank you for visiting out spacecraft</p>
+				</FancyBorder>
+			)
+    	}
+
+
+
+    	function PageOne() {
+			return (
+				<Layout left={<Left />} right={<Right />} />
+			)
+    	}
+    	function Layout(props) {
+			return (
+				<div>
+					<div className="header">header</div>
+					<div className="content">
+						<div className="left">{props.left}</div>
+						<div className="right">{props.right}</div>
+					</div>
+					<div className="footer">footer</div>
+				</div>
+			)
+    	}
+    	function Left() {
+			return <div>left area</div>
+    	}
+    	function Right() {
+			return <div>right area</div>
+    	}
+    	
+    	ReactDOM.render(
+			<PageOne />,
+			app
+    	)
+    </script>
+</body>
+</html>

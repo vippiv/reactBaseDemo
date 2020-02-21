@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>10 状态提升</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="../assets/js/react.development.js" crossorigin></script>
+    <script src="../assets/js/react-dom.development.js" crossorigin></script>
+    <script src="../assets/js/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+    	const scaleNames = {
+			c: 'Celsius',
+			f: 'Fahrenheit'
+    	}
+    	function toCelsius(fahrenheit) {
+			return (fahrenheit - 32) * 5 / 9
+    	}
+    	function toFahrenheit(celsius) {
+			return (celsius * 9 /  5) + 32
+    	}
+    	function BoilingVerdict(props) {
+			if(props.celsius >= 100) {
+				return <p>水已经开了</p>
+			}
+			return <p>水还没有开</p>
+    	}
+
+    	class TemperatureInput extends React.Component{
+			constructor(props) {
+				super(props)
+				this.state = {
+					temperature: ''
+				}
+				this.handleChange = this.handleChange.bind(this)
+			}
+			handleChange(e) {
+				this.setState({
+					temperature: e.target.value
+				})
+			}
+			render() {
+				const temperature = this.state.temperature
+				const scale = this.props.scale
+				return (
+					<div>
+						<h1>{scaleNames[scale]}</h1>
+						<input type="text" value={this.state.temperature} onChange={this.handleChange} />
+						<BoilingVerdict celsius={this.state.temperature}/>
+					</div>
+				)
+			}
+    	}
+    	class Calculator extends React.Component{
+			render() {
+				return (
+					<div>
+						<TemperatureInput scale='c'/>
+						<TemperatureInput scale='f'/>
+					</div>
+				)
+			}
+    	}
+		ReactDOM.render(
+			<Calculator />,
+			app
+		);
+    </script>
+</body>
+</html>

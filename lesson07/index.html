@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>07 条件渲染</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="../assets/js/react.development.js" crossorigin></script>
+    <script src="../assets/js/react-dom.development.js" crossorigin></script>
+    <script src="../assets/js/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+    	function UserGreenting(props) {
+			return <h1>welcome back!</h1>
+    	}
+    	
+    	function GuestGreeting(props) {
+			return  <h1>please sign up</h1>
+    	}
+
+		function Element(props) {
+			if(props.isLogin) {
+				return <UserGreenting />
+			}
+			return <GuestGreeting /> 
+		}
+		let isLogin = false
+		ReactDOM.render(
+			<Element isLogin={isLogin}/>,
+			app
+		);
+    </script>
+</body>
+</html>

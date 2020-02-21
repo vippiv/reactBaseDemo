@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>12 Demo 1</title>
+	<style>
+		body{ background-color: #ffeb3b;}
+		.circleStyle{width: 100px; height: 100px; border: 1px solid black}
+	</style>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="../assets/js/react.development.js" crossorigin></script>
+    <script src="../assets/js/react-dom.development.js" crossorigin></script>
+    <script src="../assets/js/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+    	const app = document.getElementById('app')
+    	function Circle(props) {
+			return <div className="circleStyle" style={props.styleObj}></div>
+    	}
+    	function Circles(props) {
+			let renderDate = []
+			let colors = ['#39e41', '#e94f37', '#1c89bf', '#a1d363', 'green', 'yellow', 'dark']
+			for(let i=0;i<colors.length;i++) {
+				let ran = Math.floor(Math.random() * colors.length)
+				console.log(ran)
+				let styleObj = {
+					
+					backgroundColor: colors[ran]
+				}
+				renderDate.push(<Circle styleObj={styleObj} key={i}/>)  
+			}
+			return renderDate
+    	}
+		ReactDOM.render(
+			<Circles />,
+			app
+		);
+    </script>
+</body>
+</html>

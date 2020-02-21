@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>09 表单</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="../assets/js/react.development.js" crossorigin></script>
+    <script src="../assets/js/react-dom.development.js" crossorigin></script>
+    <script src="../assets/js/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+    	class Zinput extends React.Component{
+			constructor(props) {
+				super(props)
+				this.state = {
+					value: '如花'
+				}
+				this.handleChange =  this.handleChange.bind(this)
+			}
+			handleChange(e) {
+				this.setState({
+					value: e.target.value
+				})
+			}
+			render() {
+				return (
+					<div>
+						<h2>input双向绑定</h2>
+						<input type="text" value={this.state.value} onChange={this.handleChange} />
+						<p>{this.state.value}</p>
+					</div>
+				)
+			}
+    	} 
+    	class Ztextarea extends React.Component{
+			constructor(props) {
+				super(props)
+				this.state = {
+					value: '如花'
+				}
+				this.handleChange =  this.handleChange.bind(this)
+			}
+			handleChange(e) {
+				this.setState({
+					value: e.target.value
+				})
+			}
+			render() {
+				return (
+					<div>
+						<h2>textarea双向绑定</h2>
+						<input type="text" value={this.state.value} onChange={this.handleChange} />
+						<p>{this.state.value}</p>
+					</div>
+				)
+			}
+    	}
+    	class Zselect extends React.Component{
+			constructor(props) {
+				super(props)
+				this.state = {
+					value: 1,
+					label: 'jsx简介',
+					options: [
+						{label: 'jsx简介', value: 1},
+						{label: '元素渲染', value: 2},
+						{label: '组件&props', value: 3}
+					]
+				}
+				this.handleChange =  this.handleChange.bind(this)
+			}
+			handleChange(e) {
+				console.log(this.state.options)
+				this.setState({
+					value: e.target.value,
+					label: this.state.options[e.target.value - 1].label
+				})
+			}
+			render() {
+				const el = this.state.options.map(item => {
+					return <option value={item.value} key={item.value}>{item.label}</option>
+				})
+				return (
+					<div>
+						<h2>select双向绑定</h2>
+						<select value={this.state.value} onChange={this.handleChange}>
+							{el}
+						</select>
+						<p>{this.state.label}</p>
+					</div>
+				)
+			}
+    	}
+
+    	function FormEle() {
+			return (
+				<div>
+					<Zinput />
+					<Ztextarea />
+					<Zselect />
+				</div>
+			)
+    	}
+		ReactDOM.render(
+			<FormEle />,
+			app
+		);
+    </script>
+</body>
+</html>

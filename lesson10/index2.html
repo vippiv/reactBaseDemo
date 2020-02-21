@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>10 状态提升</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="../assets/js/react.development.js" crossorigin></script>
+    <script src="../assets/js/react-dom.development.js" crossorigin></script>
+    <script src="../assets/js/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+    	function BoilingVerdict(props) {
+			if(props.celsius >= 100) {
+				return <p>水已经开了</p>
+			}
+			return <p>水还没有开</p>
+    	}
+
+    	class Calcultor extends React.Component{
+			constructor(props) {
+				super(props)
+				this.state = {
+					temperature: ''
+				}
+				this.handleChange = this.handleChange.bind(this)
+			}
+			handleChange(e) {
+				this.setState({
+					temperature: e.target.value
+				})
+			}
+			render() {
+				return (
+					<div>
+						<input type="text" value={this.state.temperature} onChange={this.handleChange} />
+						<BoilingVerdict celsius={this.state.temperature}/>
+					</div>
+				)
+			}
+    	}
+		ReactDOM.render(
+			<Calcultor />,
+			app
+		);
+    </script>
+</body>
+</html>

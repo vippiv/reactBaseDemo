@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>06 事件处理</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="../assets/js/react.development.js" crossorigin></script>
+    <script src="../assets/js/react-dom.development.js" crossorigin></script>
+    <script src="../assets/js/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+    	
+    	
+    	function Button() {
+    		function btnEvt() {
+				alert('您点击了按钮')
+	    	}
+			return <button onClick={btnEvt}>点一点</button>
+    	}
+
+    	function Alink() {
+	    	function aEvt(id, e) {
+	    		alert(id)
+	    		e.preventDefault()
+				alert('设置event.prevnetDefault才能禁止跳转')
+	    	}
+			return <a href="http://www.baidu.con" onClick={(e) => aEvt(10, e)}>百度</a>
+    	}
+
+    	class Toggle extends React.Component{
+			constructor(props) {
+				super(props)
+				this.state = {
+					isToggleOn: true
+				}
+				this.handleClick = this.handleClick.bind(this)
+			}
+
+			handleClick(id,  e) {
+				alert(id)
+				this.setState(state => {
+					return {
+						isToggleOn: !state.isToggleOn
+					}
+				})
+			}
+
+			render() {
+				return (
+					<button onClick={(e) => this.handleClick(10, e)}>
+						{this.state.isToggleOn ? "开" : "关"}
+					</button>
+				)
+			}
+    	}
+
+    	function Element() {
+			return (
+				<div>
+					<Button />
+					<Alink />
+					<Toggle />
+    			</div>
+				
+			)
+    	}
+    	ReactDOM.render(
+    		<Element  />,
+			document.getElementById('app')
+    	)
+    </script>
+</body>
+</html>

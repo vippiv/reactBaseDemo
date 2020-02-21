@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>08 列表 & Key</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script src="../assets/js/react.development.js" crossorigin></script>
+    <script src="../assets/js/react-dom.development.js" crossorigin></script>
+    <script src="../assets/js/babel.min.js" crossorigin></script>
+
+    <script type="text/babel">
+    	const studentsData = [
+    		{ id: 4, name: 'jack', age: 14 },
+			{ id: 1, name: 'tom', age: 12 },
+			{ id: 2, name: 'peter', age: 10 },
+			{ id: 3, name: 'ham', age: 16 }
+    	]
+    	const teacherData = [
+			{ id: 1, name: 'sum', age: 32 },
+			{ id: 2, name: 'alin', age: 30 },
+			{ id: 3, name: 'bakem', age: 26 },
+			{ id: 4, name: 'jack', age: 34 }
+    	]
+
+    	function Student(props) {
+    		const sd = props.students
+			const el = sd.map((item, index) => {
+				return <li key={item.id}>索引：{index} id：{item.id} 姓名：{item.name} 年龄：{item.age}</li>
+			})
+    		
+    		return <ul>{el}</ul>
+	    }
+
+	    function Teacherli(props) {
+	    	const teacher = props.teacher
+			return <li>姓名：{teacher.name}，年龄：{teacher.age}</li>
+		}
+
+		function Teachers(props) {
+			const teacherData = props.teacherData
+			const el = teacherData.map((item, index) => {
+				return <Teacherli key={item.id} teacher={item} />
+			})
+			return (
+				<ul>{el}</ul>
+			)
+		}
+
+		function ClassMate(props) {
+			const teacherData = props.teacherData
+			const studentsData = props.studentsData
+			return (
+				<div>
+					<h1>老师：</h1>
+					<Teachers teacherData={teacherData} />
+					<h2>学生：</h2>
+					<Student students={studentsData} />
+				</div>
+			)
+		}
+
+	    ReactDOM.render(
+			<ClassMate teacherData={teacherData} studentsData={studentsData}/>,
+			document.getElementById('app')
+	    )
+    </script>
+</body>
+</html>
